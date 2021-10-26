@@ -1,5 +1,5 @@
 require("dotenv").config();
-const app = require('./app');
+const app = require('./server');
 const db = require("./knex");
 
 const PORT = process.env.PORT || 3000;

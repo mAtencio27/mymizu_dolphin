@@ -1,8 +1,8 @@
 exports.up = function(knex) {
     return knex.schema.createTable('MilestoneUsers', function(table) {
         table.increments();
-        table.int('MilestoneId').inTable('Migrations').references('id');
-        table.int('UserId');
+        table.integer('MilestoneId').references('id').inTable('Milestones');
+        table.integer('UserId');
         table.timestamps();
     })
   };
