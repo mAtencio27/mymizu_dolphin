@@ -2,12 +2,15 @@ import Button from 'react-bootstrap/Button'
 function Refill() {
   return (
     <div>
-     <>
-  <style type="text/css">
-    {`
+      <>
+        <style type="text/css">
+          {`
     .btn-flat {
       background-color: #56DCEB;
       color: white;
+      font-weight: bolder;
+      cursor: pointer;
+      margin: 10px;
     }
 
     .btn-xxl {
@@ -16,12 +19,12 @@ function Refill() {
       border-radius: 10px
     }
     `}
-  </style>
+        </style>
 
-  <Button variant="flat" size="xxl">
-    Refill
-  </Button>
-</>
+        <Button variant="flat" size="xxl" className="log-refill">
+          Log refill
+        </Button>
+      </>
     </div>
   );
 }
