@@ -1,13 +1,10 @@
-import { useState } from 'react';
 import Button from 'react-bootstrap/Button'
-import Milestone from './Milestone';
+import { useHistory } from 'react-router-dom';
 
 function Refill() {
-  const [view, setView] = useState("Home");
-
+  const history = useHistory();
   const changeView = () => {
-    setView("Milestone");
-    console.log(view);
+    history.push("/milestone");
   }
 
   return (
@@ -54,12 +51,13 @@ function Refill() {
     `}
         </style>
 
-        <Button variant="milestone" size="xxl" className="log-refill"
-          onClick={() => changeView()}
+        <Button variant="milestone"
+          size="xxl"
+          className="log-refill"
+          onClick={changeView}
         >
           Check Milestone
         </Button>
-        { view === "Milestone" ? <Milestone /> : null}
       </>
     </div>
   );

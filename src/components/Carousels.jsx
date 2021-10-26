@@ -1,5 +1,6 @@
 import Carousel from 'react-bootstrap/Carousel'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Refill from './Refill';
 
 function Carousels() {
   return (
@@ -67,6 +68,7 @@ function Carousels() {
               </Carousel.Item>
 
             </Carousel>
+            <Refill />
           </div>
         </div>
       </div>
