@@ -20,12 +20,9 @@ app.use(cors({
 }));
 
 app.get("/api/me", async (req, res, next) => {
-    console.log("/test call");
     try {
-        console.log(config);
         let rawdata = await axios.get("https://my-mizu-dev2-gen8n.ondigitalocean.app/dev-api/me", config)
-        rawdata = JSON.stringify(rawdata);
-        res.send(rawdata);
+        res.json(rawdata.data);
     }
     catch (err) {
         res.sendStatus(404);
