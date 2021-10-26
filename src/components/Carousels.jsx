@@ -56,7 +56,7 @@ function Carousels() {
               <Carousel.Item>
                 <img
                   className="d-block w-100"
-                  src="https://picsum.photos/500/300?img=3"
+                  src="https://picsum.photos/500/300?img=4"
                   alt="Third slide"
                 />
                 <Carousel.Caption>
