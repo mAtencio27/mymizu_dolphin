@@ -1,7 +1,13 @@
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
+import { useHistory } from 'react-router-dom';
 
 function Milestone() {
+  const history = useHistory();
+  const changeView = () => {
+    history.push("/");
+  }
+
   const colors = [
     'Primary',
     'Secondary',
@@ -34,6 +40,33 @@ function Milestone() {
         </Card>
       ))
       }
+      <>
+        <style type="text/css">
+          {`
+    .btn-milestone {
+      background-color: #149FD4;
+      color: white;
+      font-weight: bolder;
+      cursor: pointer;
+      margin: 15px;
+    }
+
+    .btn-xxl {
+      padding: 1rem 1.5rem;
+      font-size: 1.5rem;
+      border-radius: 10px
+    }
+    `}
+        </style>
+
+        <Button variant="milestone"
+          size="xxl"
+          className="log-refill"
+          onClick={changeView}
+        >
+          Home
+        </Button>
+      </>
     </div>
   );
 }
