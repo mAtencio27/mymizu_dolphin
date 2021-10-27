@@ -21,7 +21,7 @@ app.use(cors({
     origin: '*'
 }));
 
-if (process.env.NOTE_ENV === "production") {
+if (process.env.NODE_ENV === "production") {
     // Serve static assets
     app.use(express.static(path.resolve(__dirname, "..", "build")));
 }
