@@ -1,6 +1,8 @@
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import { useHistory } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function Milestone() {
   const history = useHistory();
@@ -17,7 +19,29 @@ function Milestone() {
     'Info',
     'Light',
     'Dark',
-  ]
+  ];
+
+  const [milestones, setMilestones] = useState("hello")
+
+  useEffect(() => {
+    const grab = async () =>{
+      try {
+        console.log("trying")
+        const stones = await fetch("/api/usermilestones")
+        console.log("still trying?")
+        console.log(stones)
+        //return stones
+      }
+      catch (err) {
+        console.error("Failed to get user milestones", err)
+      }
+    //setMilestones(stones)
+    
+    }
+    grab()
+  },[])
+
+
 
   return (
     <div>
