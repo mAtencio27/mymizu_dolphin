@@ -1,5 +1,8 @@
 import Button from 'react-bootstrap/Button'
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { refill, saveMoney } from '../slices/milestone';
 
 function Refill() {
   const history = useHistory();
@@ -7,8 +10,12 @@ function Refill() {
     history.push("/milestone");
   }
 
+  const refill_amount = useSelector(state => state.milestone.refill_amount)
+  const dispatch = useDispatch();
+
   return (
     <div>
+      <h1>{refill_amount}L of water refilled</h1>
       <>
         <style type="text/css">
           {`
@@ -28,7 +35,15 @@ function Refill() {
     `}
         </style>
 
-        <Button variant="refill" size="xxl" className="log-refill">
+        <Button
+          variant="refill"
+          size="xxl"
+          className="log-refill"
+          onClick={() => {
+            dispatch(refill(0.5))
+            dispatch(saveMoney(100))
+          }}
+        >
           Log refill
         </Button>
       </>
@@ -50,7 +65,6 @@ function Refill() {
     }
     `}
         </style>
-
         <Button variant="milestone"
           size="xxl"
           className="log-refill"
