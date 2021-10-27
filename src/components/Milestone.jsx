@@ -21,22 +21,18 @@ function Milestone() {
     'Dark',
   ];
 
-  const [milestones, setMilestones] = useState("hello")
+  const [userMilestones, setuserMilestones] = useState([])
 
   useEffect(() => {
     const grab = async () =>{
       try {
-        console.log("trying")
-        const stones = await fetch("/api/usermilestones")
-        console.log("still trying?")
-        console.log(stones)
-        //return stones
+        const userStones = await axios.get(`/api/usermilestones/${32}`)
+        setuserMilestones(userStones.data);
       }
       catch (err) {
         console.error("Failed to get user milestones", err)
       }
-    //setMilestones(stones)
-    
+
     }
     grab()
   },[])
