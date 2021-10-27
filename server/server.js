@@ -4,6 +4,7 @@ const axios = require('axios');
 const cors = require('cors');
 const knex = require('./knex');
 require("dotenv").config();
+const path = require("path");
 
 const token = process.env.API_KEY
 
@@ -19,6 +20,8 @@ app.use(morgan("dev"));
 app.use(cors({
     origin: '*'
 }));
+// Serve static assets
+app.use(express.static(path.resolve(__dirname, "..", "build")));
 
 app.get("/api/me", async (req, res, next) => {
     try {
