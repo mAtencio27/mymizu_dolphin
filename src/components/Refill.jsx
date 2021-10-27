@@ -12,7 +12,8 @@ function Refill({user, handleUserChange, handleStoneChange}) {
       color: white;
       font-weight: bolder;
       cursor: pointer;
-      margin: 15px;
+      margin-top: 15px;
+      margin-left: 4px;
     }
 
     .btn-xxl {
