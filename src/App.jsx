@@ -1,18 +1,30 @@
 import './App.css';
 import Carousels from './components/Carousels';
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Button from 'react-bootstrap/Button'
 import Milestone from './components/Milestone';
 import { useState, useEffect } from 'react'
 import axios from 'axios';
+<<<<<<< HEAD
 import milestone from './slices/milestone';
+=======
+import { setPage } from './slices/pageSlice';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
+>>>>>>> master
 
 
 function App() {
 
   const [milestones, setMilestones] = useState([]);
   const [user, setUser] = useState({});
+<<<<<<< HEAD
   const [refill, serRefill] = useState(0);
   const [userMilestones, setUserMilestones] = useState([{id:1},{id:2}])
+=======
+  const page = useSelector(state => state.page)
+  const dispatch = useDispatch();
+>>>>>>> master
 
   useEffect(() => {
     const grab = async () => {
@@ -87,10 +99,11 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
+    <div>
       <header>
-        <h1>my mizu: {user.refill_amount}</h1>
+        <h1>my mizu: {user.id}</h1>
       </header>
+<<<<<<< HEAD
       <Switch>
         <main className="App-main">
           <Route path="/">
@@ -108,6 +121,42 @@ function App() {
         </main>
       </Switch>
     </BrowserRouter>
+=======
+      <main className="App-main">
+        <section className={page ? "hide" : ""}>
+          <Carousels user={user} handleUserChange={handleUserChange} />
+        </section>
+        <style type="text/css">
+          {`
+    .btn-milestone {
+      background-color: #149FD4;
+      color: white;
+      font-weight: bolder;
+      cursor: pointer;
+    }
+
+    .btn-xxl {
+      padding: 1rem 1.5rem;
+      font-size: 1.5rem;
+      border-radius: 10px
+    }
+    `}
+        </style>
+        <div className={page ? "hide" : ""}>
+          <Button variant="milestone"
+            size="xxl"
+            className="log-refill"
+            onClick={() => dispatch(setPage(true))}
+          >
+            Check Milestone
+          </Button>
+        </div>
+        <section className={!page ? "hide" : ""}>
+          <Milestone />
+        </section>
+      </main>
+    </div>
+>>>>>>> master
   );
 }
 
