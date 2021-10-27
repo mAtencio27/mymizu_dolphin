@@ -16,7 +16,6 @@ function Refill() {
   return (
     <div>
       <h1>{refill_amount}L of water refilled</h1>
-      <>
         <style type="text/css">
           {`
     .btn-refill {
@@ -46,8 +45,6 @@ function Refill() {
         >
           Log refill
         </Button>
-      </>
-      <>
         <style type="text/css">
           {`
     .btn-milestone {
@@ -72,7 +69,6 @@ function Refill() {
         >
           Check Milestone
         </Button>
-      </>
     </div>
   );
 }
