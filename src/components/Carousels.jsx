@@ -3,11 +3,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Refill from './Refill';
 import { useSelector } from 'react-redux';
 
-function Carousels() {
+function Carousels({user, handleUserChange}) {
   const refill_amount = useSelector(state => state.milestone.refill_amount)
   const CO2 = useSelector(state => state.milestone.CO2);
   const Plastic = useSelector(state => state.milestone.Plastic);
   const Money = useSelector(state => state.milestone.Money);
+  
 
   return (
     <div>
@@ -70,7 +71,7 @@ function Carousels() {
               </Carousel.Item>
 
             </Carousel>
-            <Refill />
+            <Refill user={user} handleUserChange={handleUserChange}/>
           </div>
         </div>
       </div>

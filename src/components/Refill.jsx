@@ -4,24 +4,24 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { refill, saveMoney } from '../slices/milestone';
 import { fetchUserInfo } from '../slices/milestone';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-function Refill() {
+function Refill({user, handleUserChange}) {
   const history = useHistory();
   const changeView = () => {
     history.push("/milestone");
   }
-  const refill_amount = useSelector(state => state.milestone.refill_amount)
-  const dispatch = useDispatch();
+  // const refill_amount = useSelector(state => state.milestone.refill_amount)
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchUserInfo());
-  },[])
+  // useEffect(() => {
+  //   dispatch(fetchUserInfo());
+  // },[])
 
 
   return (
     <div>
-      <h1>{refill_amount}L of water refilled</h1>
+      {/* <h1>{refill_amount}L of water refilled</h1> */}
         <style type="text/css">
           {`
     .btn-refill {
@@ -45,8 +45,13 @@ function Refill() {
           size="xxl"
           className="log-refill"
           onClick={() => {
-            dispatch(fetchUserInfo())
-            dispatch(saveMoney(100))
+            const newUser = {...user};
+            newUser.refill_amount += 0.5;
+
+            handleUserChange(newUser);
+            // dispatch(fetchUserInfo())
+            // dispatch(saveMoney(100))
+            
           }}
         >
           Log refill
