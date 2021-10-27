@@ -5,6 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from "./store/store";
 import { Provider } from 'react-redux'
+// import fetchUserInfo from './slices/milestone';
+
+// store.dispatch(fetchUserInfo);
 
 ReactDOM.render(
   <React.StrictMode>

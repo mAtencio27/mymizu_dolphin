@@ -36,7 +36,6 @@ function App() {
     grab()
   },[])
 
-
   return (
     <BrowserRouter>
         <header>

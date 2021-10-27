@@ -3,15 +3,21 @@ import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { refill, saveMoney } from '../slices/milestone';
+import { fetchUserInfo } from '../slices/milestone';
+import { useEffect } from 'react';
 
 function Refill() {
   const history = useHistory();
   const changeView = () => {
     history.push("/milestone");
   }
-
   const refill_amount = useSelector(state => state.milestone.refill_amount)
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUserInfo());
+  },[])
+
 
   return (
     <div>
@@ -40,7 +46,7 @@ function Refill() {
           size="xxl"
           className="log-refill"
           onClick={() => {
-            dispatch(refill(0.5))
+            dispatch(fetchUserInfo())
             dispatch(saveMoney(100))
           }}
         >
