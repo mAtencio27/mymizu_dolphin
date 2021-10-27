@@ -16,6 +16,7 @@ function App() {
   const [user, setUser] = useState({});
   const page = useSelector(state => state.page)
   const dispatch = useDispatch();
+  const [userMilestones, setUserMilestones] = useState(["stone1","stone2"])
 
   useEffect(() => {
     const grab = async () => {
@@ -43,6 +44,47 @@ function App() {
     grab()
   }, [])
 
+  useEffect(() => {
+    const grab = async () => {
+      try {
+        const userStones = await axios.get(`/api/usermilestones/${user.id}`)
+        setUserMilestones(userStones.data)
+      }
+      catch (err) {
+        console.error("cannot find the stones",err)
+      }
+    }
+    grab()
+  }, [] )
+
+  function milestoneCheck(){
+    const accomplished = ["check if working"]
+
+    //Water
+    const waterStones = milestones.filter((stone)=> {
+      if(stone.type === "Water" && stone.Goalvalue <= user.refill_amount){
+        return stone
+      }
+    });
+    //C02
+    const carbonStones = milestones.filter((stone) => {
+      if(stone.type === "CO2" && stone.Goalvalue <= user.refill_count*.083){
+        return stone
+      }
+    });
+    ///money
+    const moneyStones = milestones.filter((stone) => {
+      if(stone.type === "Money" && stone.Goalvalue <= user.refill_count*100)
+      return stone
+    });
+    //plastic
+    const plasticStones = milestones.filter((stone) => {
+      if(stone.type === "Plastic" && stone.Goalvalue <= user.refill_count*.0925)
+      return stone
+    })
+    return accomplished
+  };
+
   const handleUserChange = (changedUser) => {
     setUser(changedUser);
   }
@@ -54,7 +96,11 @@ function App() {
       </header>
       <main className="App-main">
         <section className={page ? "hide" : ""}>
-          <Carousels user={user} handleUserChange={handleUserChange} />
+          <Carousels user={user} 
+            handleUserChange={handleUserChange} 
+            userMilestones={userMilestones}
+            milestoneCheck={milestoneCheck}
+            />
         </section>
         <style type="text/css">
           {`
@@ -82,7 +128,9 @@ function App() {
           </Button>
         </div>
         <section className={!page ? "hide" : ""}>
-          <Milestone />
+          <Milestone 
+            userMilestones={userMilestones}
+          />
         </section>
       </main>
     </div>
