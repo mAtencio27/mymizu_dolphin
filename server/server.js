@@ -55,4 +55,9 @@ app.post("/api/usermilestones", async (req, res) => {
     res.json(data);
 })
 
+// Always return the main index.html, so react-router render the route in the client
+app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "..", "build", "index.html"));
+  });
+
 module.exports = app;
