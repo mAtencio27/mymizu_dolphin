@@ -8,7 +8,7 @@ export const fetchUserInfo = createAsyncThunk(
             const user = await axios.get("/api/me")
             // const data = user.data.refill_amount;
             const data = user.data
-            // console.log(data)
+            console.log(data)
             return data;
         } catch (err) {
             console.log(err);
@@ -39,9 +39,8 @@ const milestoneSlice = createSlice({
         }
     },
     extraReducers: {
-        [fetchUserInfo.fulfilled]: (state) => {
-            // state.refill_amount += action.payload;
-            return state
+        [fetchUserInfo.fulfilled]: (state, action) => {
+            state.refill_amount += action.payload;
         }
     }
 });
