@@ -60,7 +60,6 @@ function Milestone() {
         </Card>
       ))
       }
-      <>
         <style type="text/css">
           {`
     .btn-milestone {
@@ -86,7 +85,6 @@ function Milestone() {
         >
           Home
         </Button>
-      </>
     </div>
   );
 }
