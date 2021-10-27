@@ -8,14 +8,13 @@ export const fetchUserInfo = createAsyncThunk(
             const user = await axios.get("/api/me")
             // const data = user.data.refill_amount;
             const data = user.data
-            console.log(data)
+            // console.log(data)
             return data;
         } catch (err) {
             console.log(err);
         }
     }
 )
-
 
 const initialState = {
     refill_amount: 0 ,
