@@ -20,8 +20,12 @@ app.use(morgan("dev"));
 app.use(cors({
     origin: '*'
 }));
-// Serve static assets
-app.use(express.static(path.resolve(__dirname, "..", "build")));
+
+if (process.env.NOTE_ENV === "production") {
+    // Serve static assets
+    app.use(express.static(path.resolve(__dirname, "..", "build")));
+}
+
 
 app.get("/api/me", async (req, res, next) => {
     try {
