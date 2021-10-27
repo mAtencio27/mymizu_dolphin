@@ -1,14 +1,12 @@
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { setPage } from '../slices/pageSlice';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
 function Milestone() {
-  const history = useHistory();
-  const changeView = () => {
-    history.push("/");
-  }
+  const dispatch = useDispatch();
 
   const colors = [
     'Primary',
@@ -81,7 +79,7 @@ function Milestone() {
         <Button variant="milestone"
           size="xxl"
           className="log-refill"
-          onClick={changeView}
+          onClick={() => dispatch(setPage(false))}
         >
           Home
         </Button>

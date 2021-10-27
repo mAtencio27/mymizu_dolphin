@@ -1,14 +1,13 @@
 import Carousel from 'react-bootstrap/Carousel'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Refill from './Refill';
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 function Carousels({user, handleUserChange}) {
-  const refill_amount = useSelector(state => state.milestone.refill_amount)
-  const CO2 = useSelector(state => state.milestone.CO2);
-  const Plastic = useSelector(state => state.milestone.Plastic);
-  const Money = useSelector(state => state.milestone.Money);
-  
+  const [stone, setStones] = useState(0);
+  const handleStoneChange = (changedUser) => {
+    setStones(changedUser.refill_amount)
+  }
 
   return (
     <div>
@@ -28,7 +27,7 @@ function Carousels({user, handleUserChange}) {
                   alt="First slide"
                 />
                 <Carousel.Caption>
-                  <h3>I've saved {refill_amount} L water!</h3>
+                  <h3>I've saved {stone} L water!</h3>
                   <p>we can put additional text here</p>
                 </Carousel.Caption>
               </Carousel.Item>
@@ -41,7 +40,7 @@ function Carousels({user, handleUserChange}) {
                 />
 
                 <Carousel.Caption>
-                  <h3>I've saved {CO2} kg of CO2!</h3>
+                  <h3>I've saved {stone} kg of CO2!</h3>
                   <p>we can put additional text here</p>
                 </Carousel.Caption>
               </Carousel.Item>
@@ -53,7 +52,7 @@ function Carousels({user, handleUserChange}) {
                   alt="Third slide"
                 />
                 <Carousel.Caption>
-                  <h3>I've saved {Plastic} kg of Plastic!</h3>
+                  <h3>I've saved {stone} kg of Plastic!</h3>
                   <p>we can put additional text here</p>
                 </Carousel.Caption>
               </Carousel.Item>
@@ -65,13 +64,16 @@ function Carousels({user, handleUserChange}) {
                   alt="Third slide"
                 />
                 <Carousel.Caption>
-                  <h3>I've saved {Money} yen!</h3>
+                  <h3>I've saved {stone * 200} yen!</h3>
                   <p>we can put additional text here</p>
                 </Carousel.Caption>
               </Carousel.Item>
 
             </Carousel>
-            <Refill user={user} handleUserChange={handleUserChange}/>
+            <Refill user={user} 
+            handleUserChange={handleUserChange}
+            handleStoneChange={handleStoneChange}
+            />
           </div>
         </div>
       </div>

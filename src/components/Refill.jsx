@@ -1,27 +1,10 @@
 import Button from 'react-bootstrap/Button'
-import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { refill, saveMoney } from '../slices/milestone';
-import { fetchUserInfo } from '../slices/milestone';
-import { useEffect, useState } from 'react';
 
-function Refill({user, handleUserChange}) {
-  const history = useHistory();
-  const changeView = () => {
-    history.push("/milestone");
-  }
-  // const refill_amount = useSelector(state => state.milestone.refill_amount)
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(fetchUserInfo());
-  // },[])
-
+function Refill({user, handleUserChange, handleStoneChange}) {
 
   return (
     <div>
-      {/* <h1>{refill_amount}L of water refilled</h1> */}
+      <h1>{user.refill_amount}L of water refilled</h1>
         <style type="text/css">
           {`
     .btn-refill {
@@ -47,38 +30,11 @@ function Refill({user, handleUserChange}) {
           onClick={() => {
             const newUser = {...user};
             newUser.refill_amount += 0.5;
-
             handleUserChange(newUser);
-            // dispatch(fetchUserInfo())
-            // dispatch(saveMoney(100))
-            
+            handleStoneChange(newUser);
           }}
         >
           Log refill
-        </Button>
-        <style type="text/css">
-          {`
-    .btn-milestone {
-      background-color: #149FD4;
-      color: white;
-      font-weight: bolder;
-      cursor: pointer;
-      margin: 15px;
-    }
-
-    .btn-xxl {
-      padding: 1rem 1.5rem;
-      font-size: 1.5rem;
-      border-radius: 10px
-    }
-    `}
-        </style>
-        <Button variant="milestone"
-          size="xxl"
-          className="log-refill"
-          onClick={changeView}
-        >
-          Check Milestone
         </Button>
     </div>
   );
