@@ -44,50 +44,26 @@ function App() {
     grab()
   }, [])
 
-  useEffect(() => {
-    const grab = async () => {
-      try {
-        const userStones = await axios.get(`/api/usermilestones/${user.id}`)
-        setUserMilestones(userStones.data)
-      }
-      catch (err) {
-        console.error("cannot find the stones",err)
-      }
+  const getAccomplishedMilestones = (refill_amount, allMilestones) => {
+    const convertRefillToUOM = (type, refill_amount) => {
+        switch(type) {
+            case "Water":
+            return refill_amount;
+            case "Plastic":
+            return refill_amount * 0.02; // 1L of water saves 20g of plastic
+            case "CO2":
+            return refill_amount * 0.1656; // carbon footprint per liter
+            case "Money":
+            return refill_amount * 200; // 200 yen per liter
+            default:
+            return null;
+        }
     }
-    grab()
-  }, [] )
+    
+    // Check if we have reached milestones
+    return allMilestones.filter((stone) => convertRefillToUOM(stone.Type, refill_amount) >= stone.GoalValue)
+}
 
-  function milestoneCheck(){
-    //preventDefault();
-    const accomplished = []
-
-    //Water
-    const waterStones = milestones.filter((stone)=> {
-      if(stone.type == "Water" /*&& stone.Goalvalue <= user.refill_amount*/){
-        return stone
-      }
-    });
-    // //C02
-    // const carbonStones = milestones.filter((stone) => {
-    //   if(stone.type === "CO2" && stone.Goalvalue <= user.refill_count*.083){
-    //     return stone
-    //   }
-    // });
-    // ///money
-    // const moneyStones = milestones.filter((stone) => {
-    //   if(stone.type === "Money" && stone.Goalvalue <= user.refill_count*100)
-    //   return stone
-    // });
-    // //plastic
-    // const plasticStones = milestones.filter((stone) => {
-    //   if(stone.type === "Plastic" && stone.Goalvalue <= user.refill_count*.0925)
-    //   return stone
-    // })
-    console.log("working hopefully")
-    //console.log(milestones)
-    console.log(waterStones)
-    return accomplished
-  };
 
   const handleUserChange = (changedUser) => {
     setUser(changedUser);
@@ -96,7 +72,6 @@ function App() {
   const milestoneButtonHandler = () => {
     //milestoneCheck()
     //console.log("cool")
-    milestoneCheck()
     dispatch(setPage(true))
   }
 
@@ -139,7 +114,9 @@ function App() {
         </div>
         <section className={!page ? "hide" : ""}>
           <Milestone 
-            userMilestones={userMilestones}
+            user={user}
+            milestones={milestones}
+            getAccomplishedMilestones= {getAccomplishedMilestones}
           />
         </section>
       </main>
