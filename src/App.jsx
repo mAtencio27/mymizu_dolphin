@@ -50,7 +50,7 @@ function App() {
         switch(type) {
             case "Water":
             return refill_amount;
-            case "Plastic":
+            case "Plastic": 
             return refill_amount * 0.02; // 1L of water saves 20g of plastic
             case "CO2":
             return refill_amount * 0.1656; // carbon footprint per liter
