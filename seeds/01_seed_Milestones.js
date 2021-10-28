@@ -16,7 +16,6 @@ exports.seed = function(knex) {
         {Name: 'Reusable straw', Type: 'Money', UnitOfMeasure: 'Yen', GoalValue: 2000, Message: "Save the turtles!"},
         {Name: 'Tote Bag', Type: 'Money', UnitOfMeasure: 'Yen', GoalValue: 3000, Message: "Bag for life!"},
         {Name: 'Hydroflask', Type: 'Money', UnitOfMeasure: 'Yen', GoalValue: 6000, Message: "Saving the environment is thirsty work!"},
-        {Name: 'Reusable straw', Type: 'Money', UnitOfMeasure: 'Yen', GoalValue: 2000, Message: "Save the turtles!"},
         {Name: 'Bicycle', Type: 'Money', UnitOfMeasure: 'Yen', GoalValue: 25000, Message: "Re-cycling for the future!"},
         {Name: 'Electric Car', Type: 'Money', UnitOfMeasure: 'Yen', GoalValue: 300000, Message: "Driving our way to a better future!"}
       ]);

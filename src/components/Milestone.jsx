@@ -1,43 +1,47 @@
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-import { useState, useEffect } from 'react';
+import Container from 'react-bootstrap/Container'
 import { setPage } from '../slices/pageSlice';
 import { useDispatch } from 'react-redux';
-import axios from 'axios';
 
 function Milestone({user, milestones, getAccomplishedMilestones}) {
   const dispatch = useDispatch();
 
-  const colors = [
-    'Primary',
-    'Secondary',
-    'Success',
-    'Danger',
-    'Warning',
-    'Info',
-    'Light',
-    'Dark',
-  ];
+  const colors = (type) => {
+    switch(type) {
+      case "Water":
+        return "primary";
+      case "CO2":
+        return "secondary"
+      case "Plastic":
+        return "success"
+      case "Money": 
+        return "warning"
+      default: 
+        return "light"
+    }
+  }
 
   const accomplishedMilestones = getAccomplishedMilestones(user.refill_amount, milestones)
 
 
   return (
-    <div>
+    <div className="central">
+    <Container fluid>
       {accomplishedMilestones.map((milestone, idx) => (
         <Card
-          bg="Primary"
+          bg={colors(milestone.Type)}
           key={idx}
-          style={{ width: '18rem', margin: '15px', display: 'flex', flexWrap: 'wrap' }}
+          text={milestone.Type === "Money" ? "black" :"white"}
+          style={{  margin: '15px', display: 'flex', flexWrap: 'wrap' }}
           className="mb-2"
         >
           <Card.Header>{milestone.Type}</Card.Header>
           <Card.Body>
             <Card.Title>{milestone.Name}</Card.Title>
-            {/* <Card.Text>
-              Some quick example text to build on the card title and make up the bulk
-              of the card's content.
-            </Card.Text> */}
+            Congratulations for reaching this milestone!
+            <br/>
+            {milestone.Message}
           </Card.Body>
         </Card>
       ))
@@ -57,6 +61,11 @@ function Milestone({user, milestones, getAccomplishedMilestones}) {
       font-size: 1.5rem;
       border-radius: 10px
     }
+
+    .central {
+      margin: auto;
+  width: 50%;
+    }
     `}
         </style>
 
@@ -67,7 +76,9 @@ function Milestone({user, milestones, getAccomplishedMilestones}) {
         >
           Home
         </Button>
+    </Container>
     </div>
+
   );
 }
 
