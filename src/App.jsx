@@ -58,35 +58,46 @@ function App() {
   }, [] )
 
   function milestoneCheck(){
-    const accomplished = ["check if working"]
+    //preventDefault();
+    const accomplished = []
 
     //Water
     const waterStones = milestones.filter((stone)=> {
-      if(stone.type === "Water" && stone.Goalvalue <= user.refill_amount){
+      if(stone.type == "Water" /*&& stone.Goalvalue <= user.refill_amount*/){
         return stone
       }
     });
-    //C02
-    const carbonStones = milestones.filter((stone) => {
-      if(stone.type === "CO2" && stone.Goalvalue <= user.refill_count*.083){
-        return stone
-      }
-    });
-    ///money
-    const moneyStones = milestones.filter((stone) => {
-      if(stone.type === "Money" && stone.Goalvalue <= user.refill_count*100)
-      return stone
-    });
-    //plastic
-    const plasticStones = milestones.filter((stone) => {
-      if(stone.type === "Plastic" && stone.Goalvalue <= user.refill_count*.0925)
-      return stone
-    })
+    // //C02
+    // const carbonStones = milestones.filter((stone) => {
+    //   if(stone.type === "CO2" && stone.Goalvalue <= user.refill_count*.083){
+    //     return stone
+    //   }
+    // });
+    // ///money
+    // const moneyStones = milestones.filter((stone) => {
+    //   if(stone.type === "Money" && stone.Goalvalue <= user.refill_count*100)
+    //   return stone
+    // });
+    // //plastic
+    // const plasticStones = milestones.filter((stone) => {
+    //   if(stone.type === "Plastic" && stone.Goalvalue <= user.refill_count*.0925)
+    //   return stone
+    // })
+    console.log("working hopefully")
+    //console.log(milestones)
+    console.log(waterStones)
     return accomplished
   };
 
   const handleUserChange = (changedUser) => {
     setUser(changedUser);
+  }
+
+  const milestoneButtonHandler = () => {
+    //milestoneCheck()
+    //console.log("cool")
+    milestoneCheck()
+    dispatch(setPage(true))
   }
 
   return (
@@ -99,7 +110,6 @@ function App() {
           <Carousels user={user} 
             handleUserChange={handleUserChange} 
             userMilestones={userMilestones}
-            milestoneCheck={milestoneCheck}
             />
         </section>
         <style type="text/css">
@@ -122,7 +132,7 @@ function App() {
           <Button variant="milestone"
             size="xxl"
             className="log-refill"
-            onClick={() => dispatch(setPage(true))}
+            onClick={milestoneButtonHandler}
           >
             Check Milestone
           </Button>
