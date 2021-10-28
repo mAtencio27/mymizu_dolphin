@@ -5,11 +5,9 @@ import { setPage } from '../slices/pageSlice';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
-function Milestone() {
-  // const history = useHistory();
-  // const changeView = () => {
-  //   history.push("/");
-  // }
+function Milestone({user, milestones, getAccomplishedMilestones}) {
+
+  const accomplishedMilestones = getAccomplishedMilestones(user.refill_amount, milestones)
   const page = useSelector(state => state.page)
   const dispatch = useDispatch();
 
