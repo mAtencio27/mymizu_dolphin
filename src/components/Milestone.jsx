@@ -1,29 +1,62 @@
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
+import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { setPage } from '../slices/pageSlice';
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
-function Milestone({user, milestones, getAccomplishedMilestones}) {
+function Milestone() {
+  // const history = useHistory();
+  // const changeView = () => {
+  //   history.push("/");
+  // }
+  const page = useSelector(state => state.page)
   const dispatch = useDispatch();
 
+  const colors = [
+    'Primary',
+    'Secondary',
+    'Success',
+    'Danger',
+    'Warning',
+    'Info',
+    'Light',
+    'Dark',
+  ];
 
-  const accomplishedMilestones = getAccomplishedMilestones(user.refill_amount, milestones)
-  // handleAccomplished(accomplishedMilestones);
+  const [userMilestones, setuserMilestones] = useState([])
+
+  useEffect(() => {
+    const grab = async () =>{
+      try {
+        const userStones = await axios.get(`/api/usermilestones/${32}`)
+        setuserMilestones(userStones.data);
+      }
+      catch (err) {
+        console.error("Failed to get user milestones", err)
+      }
+
+    }
+    grab()
+  },[])
+
+
 
   return (
     <div>
-      {accomplishedMilestones.map((milestone, idx) => (
+      {colors.map((variant, idx) => (
         <Card
-          bg="Primary"
+          bg={variant.toLowerCase()}
           key={idx}
+          text={variant.toLowerCase() === 'light' ? 'dark' : 'white'}
           style={{ width: '18rem', margin: '15px', display: 'flex', flexWrap: 'wrap' }}
           className="mb-2"
         >
-          <Card.Header>{milestone.Type}</Card.Header>
+          <Card.Header>Header</Card.Header>
           <Card.Body>
-            <Card.Title>{milestone.Name}</Card.Title>
+            <Card.Title>{variant} Card Title </Card.Title>
             {/* <Card.Text>
               Some quick example text to build on the card title and make up the bulk
               of the card's content.
@@ -53,7 +86,7 @@ function Milestone({user, milestones, getAccomplishedMilestones}) {
         <Button variant="milestone"
           size="xxl"
           className="log-refill"
-          onClick={() => dispatch(setPage(false))}
+          onClick={() =>dispatch(setPage(false))}
         >
           Home
         </Button>

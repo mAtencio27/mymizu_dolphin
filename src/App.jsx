@@ -8,6 +8,7 @@ import axios from 'axios';
 import { setPage } from './slices/pageSlice';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import Alert from 'react-bootstrap/Alert'
 
 
 
@@ -17,9 +18,9 @@ function App() {
   const [user, setUser] = useState({});
   const page = useSelector(state => state.page)
   const dispatch = useDispatch();
-  const [userMilestones, setUserMilestones] = useState(["stone1","stone2"])
-  // const [accomplished, setAccomplished] = useState([]);
-  // console.log(accomplished)
+  const [userMilestones, setUserMilestones] = useState(["stone1", "stone2"])
+  const [show, setShow] = useState(false);
+
   useEffect(() => {
     const grab = async () => {
       try {
@@ -48,23 +49,23 @@ function App() {
 
   const getAccomplishedMilestones = (refill_amount, allMilestones) => {
     const convertRefillToUOM = (type, refill_amount) => {
-        switch(type) {
-            case "Water":
-            return refill_amount;
-            case "Plastic": 
-            return refill_amount * 0.02; // 1L of water saves 20g of plastic
-            case "CO2":
-            return refill_amount * 0.1656; // carbon footprint per liter
-            case "Money":
-            return refill_amount * 200; // 200 yen per liter
-            default:
-            return null;
-        }
+      switch (type) {
+        case "Water":
+          return refill_amount;
+        case "Plastic":
+          return refill_amount * 0.02; // 1L of water saves 20g of plastic
+        case "CO2":
+          return refill_amount * 0.1656; // carbon footprint per liter
+        case "Money":
+          return refill_amount * 200; // 200 yen per liter
+        default:
+          return null;
+      }
     }
-    
+
     // Check if we have reached milestones
     return allMilestones.filter((stone) => convertRefillToUOM(stone.Type, refill_amount) >= stone.GoalValue)
-}
+  }
 
 
   const handleUserChange = (changedUser) => {
@@ -72,13 +73,15 @@ function App() {
   }
 
   const milestoneButtonHandler = () => {
-    //milestoneCheck()
-    //console.log("cool")
     dispatch(setPage(true))
   }
 
-  // const handleAccomplished = (stone) => {
-  //   setAccomplished(stone)
+  
+  let accomplishedMilestones = getAccomplishedMilestones(user.refill_amount, milestones)
+  // const handleAlert = () => {
+  //   if (accomplishedMilestones.length) {
+  //     setShow(true);
+  //   }
   // }
 
   return (
@@ -87,12 +90,30 @@ function App() {
         <h1>my mizu: {user.id}</h1>
       </header>
       <main className="App-main">
-        <AlertFunc getAccomplishedMilestones={getAccomplishedMilestones}/>
+        {/* <AlertFunc 
+        user={user}
+        milestones={milestones}
+        getAccomplishedMilestones={getAccomplishedMilestones}
+      /> */}
+        {accomplishedMilestones.length ?
+        <div className={page ? "hide" : ""}>
+          <Alert
+            variant="info"
+            show={true}
+            onClose={() => {
+              // setShow(false)
+              accomplishedMilestones = [];
+            }}
+            // onClick={() => dispatch(setPage(false))}
+            style={{ width: '90%', marginLeft: '14px' }}
+            dismissible
+          >You've reached Milestone!</Alert></div>
+          : null}
         <section className={page ? "hide" : ""}>
-          <Carousels user={user} 
-            handleUserChange={handleUserChange} 
+          <Carousels user={user}
+            handleUserChange={handleUserChange}
             userMilestones={userMilestones}
-            />
+          />
         </section>
         <style type="text/css">
           {`
@@ -120,11 +141,11 @@ function App() {
           </Button>
         </div>
         <section className={!page ? "hide" : ""}>
-          <Milestone 
+          <Milestone
             user={user}
             milestones={milestones}
-            getAccomplishedMilestones= {getAccomplishedMilestones}
-            // handleAccomplished={handleAccomplished}
+            getAccomplishedMilestones={getAccomplishedMilestones}
+          // handleAccomplished={handleAccomplished}
           />
         </section>
       </main>
