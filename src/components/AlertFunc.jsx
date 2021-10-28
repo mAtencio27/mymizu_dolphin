@@ -1,11 +1,8 @@
 import { useState } from "react";
 import Alert from 'react-bootstrap/Alert'
 
-function AlertFunc() {
-    const [show, setShow] = useState(true);
-    const handleChange = () => {
-        setShow(true);
-    }
+function AlertFunc({}) {
+    const [show, setShow] = useState(false);
 
     return (
         <Alert variant="info"

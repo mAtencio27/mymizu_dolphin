@@ -57,7 +57,7 @@ function Milestone({user, milestones, getAccomplishedMilestones}) {
 
 
   const accomplishedMilestones = getAccomplishedMilestones(user.refill_amount, milestones)
-
+  // handleAccomplished(accomplishedMilestones);
 
   return (
     <div className="central">

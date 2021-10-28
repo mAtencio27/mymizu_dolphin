@@ -18,7 +18,8 @@ function App() {
   const page = useSelector(state => state.page)
   const dispatch = useDispatch();
   const [userMilestones, setUserMilestones] = useState(["stone1","stone2"])
-
+  // const [accomplished, setAccomplished] = useState([]);
+  // console.log(accomplished)
   useEffect(() => {
     const grab = async () => {
       try {
@@ -76,13 +77,17 @@ function App() {
     dispatch(setPage(true))
   }
 
+  // const handleAccomplished = (stone) => {
+  //   setAccomplished(stone)
+  // }
+
   return (
     <div>
       <header>
         <h1>my mizu: {user.id}</h1>
       </header>
       <main className="App-main">
-        <AlertFunc />
+        <AlertFunc getAccomplishedMilestones={getAccomplishedMilestones}/>
         <section className={page ? "hide" : ""}>
           <Carousels user={user} 
             handleUserChange={handleUserChange} 
@@ -119,6 +124,7 @@ function App() {
             user={user}
             milestones={milestones}
             getAccomplishedMilestones= {getAccomplishedMilestones}
+            // handleAccomplished={handleAccomplished}
           />
         </section>
       </main>
