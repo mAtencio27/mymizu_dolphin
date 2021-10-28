@@ -5,7 +5,7 @@ import { setPage } from '../slices/pageSlice';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
-function Milestone() {
+function Milestone({user, milestones, getAccomplishedMilestones}) {
   const dispatch = useDispatch();
 
   const colors = [
@@ -19,37 +19,21 @@ function Milestone() {
     'Dark',
   ];
 
-  const [userMilestones, setuserMilestones] = useState([])
-
-  useEffect(() => {
-    const grab = async () =>{
-      try {
-        const userStones = await axios.get(`/api/usermilestones/${32}`)
-        setuserMilestones(userStones.data);
-      }
-      catch (err) {
-        console.error("Failed to get user milestones", err)
-      }
-
-    }
-    grab()
-  },[])
-
+  const accomplishedMilestones = getAccomplishedMilestones(user.refill_amount, milestones)
 
 
   return (
     <div>
-      {colors.map((variant, idx) => (
+      {accomplishedMilestones.map((milestone, idx) => (
         <Card
-          bg={variant.toLowerCase()}
+          bg="Primary"
           key={idx}
-          text={variant.toLowerCase() === 'light' ? 'dark' : 'white'}
           style={{ width: '18rem', margin: '15px', display: 'flex', flexWrap: 'wrap' }}
           className="mb-2"
         >
-          <Card.Header>Header</Card.Header>
+          <Card.Header>{milestone.Type}</Card.Header>
           <Card.Body>
-            <Card.Title>{variant} Card Title </Card.Title>
+            <Card.Title>{milestone.Name}</Card.Title>
             {/* <Card.Text>
               Some quick example text to build on the card title and make up the bulk
               of the card's content.
