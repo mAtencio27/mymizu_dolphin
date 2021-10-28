@@ -2,6 +2,7 @@ import './App.css';
 import Carousels from './components/Carousels';
 import Button from 'react-bootstrap/Button'
 import Milestone from './components/Milestone';
+import AlertFunc from './components/AlertFunc';
 import { useState, useEffect } from 'react'
 import axios from 'axios';
 import { setPage } from './slices/pageSlice';
@@ -81,6 +82,7 @@ function App() {
         <h1>my mizu: {user.id}</h1>
       </header>
       <main className="App-main">
+        <AlertFunc />
         <section className={page ? "hide" : ""}>
           <Carousels user={user} 
             handleUserChange={handleUserChange} 
