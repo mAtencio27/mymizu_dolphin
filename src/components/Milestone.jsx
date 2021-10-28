@@ -8,19 +8,9 @@ import axios from 'axios';
 function Milestone({user, milestones, getAccomplishedMilestones}) {
   const dispatch = useDispatch();
 
-  const colors = [
-    'Primary',
-    'Secondary',
-    'Success',
-    'Danger',
-    'Warning',
-    'Info',
-    'Light',
-    'Dark',
-  ];
 
   const accomplishedMilestones = getAccomplishedMilestones(user.refill_amount, milestones)
-
+  // handleAccomplished(accomplishedMilestones);
 
   return (
     <div>
