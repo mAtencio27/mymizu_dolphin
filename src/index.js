@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from "./store/store";
 import { Provider } from 'react-redux'
+import 'bootstrap-icons/font/bootstrap-icons.css';
 // import fetchUserInfo from './slices/milestone';
 
 // store.dispatch(fetchUserInfo);
