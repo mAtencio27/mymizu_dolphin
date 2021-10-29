@@ -4,7 +4,7 @@ function Refill({user, handleUserChange, handleStoneChange}) {
 
   return (
     <div>
-      <h1>{user.refill_amount}L of water refilled</h1>
+      <h1 className="refill">{user.refill_amount}L of water refilled</h1>
         <style type="text/css">
           {`
     .btn-refill {
@@ -34,7 +34,7 @@ function Refill({user, handleUserChange, handleStoneChange}) {
             handleUserChange(newUser);
             handleStoneChange(newUser);
           }}
-          // style={{display: 'block', margin: '0 auto'}}
+          style={{display: 'block', margin: '0 auto'}}
         >
           Log refill
         </Button>
