@@ -2,12 +2,12 @@ import './App.css';
 import Carousels from './components/Carousels';
 import Button from 'react-bootstrap/Button'
 import Milestone from './components/Milestone';
-import AlertFunc from './components/AlertFunc';
 import { useState, useEffect } from 'react'
 import axios from 'axios';
 import { setPage } from './slices/pageSlice';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import Alert from 'react-bootstrap/Alert'
 
 
 
@@ -17,9 +17,8 @@ function App() {
   const [user, setUser] = useState({});
   const page = useSelector(state => state.page)
   const dispatch = useDispatch();
-  const [userMilestones, setUserMilestones] = useState(["stone1","stone2"])
-  // const [accomplished, setAccomplished] = useState([]);
-  // console.log(accomplished)
+  const [show, setShow] = useState(false);
+
   useEffect(() => {
     const grab = async () => {
       try {
@@ -48,23 +47,23 @@ function App() {
 
   const getAccomplishedMilestones = (refill_amount, allMilestones) => {
     const convertRefillToUOM = (type, refill_amount) => {
-        switch(type) {
-            case "Water":
-            return refill_amount;
-            case "Plastic": 
-            return refill_amount * 0.02; // 1L of water saves 20g of plastic
-            case "CO2":
-            return refill_amount * 0.1656; // carbon footprint per liter
-            case "Money":
-            return refill_amount * 200; // 200 yen per liter
-            default:
-            return null;
-        }
+      switch (type) {
+        case "Water":
+          return refill_amount;
+        case "Plastic":
+          return refill_amount * 0.02; // 1L of water saves 20g of plastic
+        case "CO2":
+          return refill_amount * 0.1656; // carbon footprint per liter
+        case "Money":
+          return refill_amount * 200; // 200 yen per liter
+        default:
+          return null;
+      }
     }
-    
+
     // Check if we have reached milestones
     return allMilestones.filter((stone) => convertRefillToUOM(stone.Type, refill_amount) >= stone.GoalValue)
-}
+  }
 
 
   const handleUserChange = (changedUser) => {
@@ -72,27 +71,59 @@ function App() {
   }
 
   const milestoneButtonHandler = () => {
-    //milestoneCheck()
-    //console.log("cool")
     dispatch(setPage(true))
   }
 
-  // const handleAccomplished = (stone) => {
-  //   setAccomplished(stone)
+  const accomplishedMilestones = getAccomplishedMilestones(user.refill_amount, milestones)
+  // const handleAlert = () => {
+    //   if (accomplishedMilestones.length) {
+      //     setShow(true);
+      //   }
+      // }
+      // if the milestone updated ---> if the length change, setShow(true)
+      // if user close the alert setShow(false)
+      
+      
+      // const now = new Date();
+      // const greet = () => {
+        //   if(now.getHours() <= 3 && now.getHours() >= 17) {
+  //     return 'Good evening, '
+  //   } else if (now.getHours() >= 4 && now.getHours() <= 9) {
+  //     return 'Good morning, '
+  //   } else if (now.getHours() >= 10 && now.getHours() <= 12) {
+  //     return 'Hello, '
+  //   } else {
+  //     return 'Good afternoon, '
+  //   }
   // }
-
+  
   return (
     <div>
       <header>
-        <h1>my mizu: {user.id}</h1>
+        <h1>mymizu Milestones</h1>
       </header>
       <main className="App-main">
-        <AlertFunc getAccomplishedMilestones={getAccomplishedMilestones}/>
+        {/* <AlertFunc 
+        user={user}
+        milestones={milestones}
+        getAccomplishedMilestones={getAccomplishedMilestones}
+      /> */}
+        {/* {accomplishedMilestones.length ?  
+          <Alert
+            variant="info"
+            show={true}
+            onClose={() => {
+              setShow(false)
+              // accomplishedMilestones = [];
+            }}
+            style={{ width: '90%', marginLeft: '14px' }}
+            dismissible
+          >You've reached Milestone🎉</Alert> 
+           : null}  */}
         <section className={page ? "hide" : ""}>
-          <Carousels user={user} 
-            handleUserChange={handleUserChange} 
-            userMilestones={userMilestones}
-            />
+          <Carousels user={user}
+            handleUserChange={handleUserChange}
+          />
         </section>
         <style type="text/css">
           {`
@@ -115,16 +146,16 @@ function App() {
             size="xxl"
             className="log-refill"
             onClick={milestoneButtonHandler}
+            // style={{display: 'block', margin: '0 auto'}}
           >
             Check Milestone
           </Button>
         </div>
         <section className={!page ? "hide" : ""}>
-          <Milestone 
+          <Milestone
             user={user}
             milestones={milestones}
-            getAccomplishedMilestones= {getAccomplishedMilestones}
-            // handleAccomplished={handleAccomplished}
+            getAccomplishedMilestones={getAccomplishedMilestones}
           />
         </section>
       </main>

@@ -5,6 +5,8 @@ import { setPage } from '../slices/pageSlice';
 import { useDispatch } from 'react-redux';
 
 function Milestone({user, milestones, getAccomplishedMilestones}) {
+
+  const accomplishedMilestones = getAccomplishedMilestones(user.refill_amount, milestones)
   const dispatch = useDispatch();
 
   const colors = (type) => {
@@ -56,8 +58,6 @@ function Milestone({user, milestones, getAccomplishedMilestones}) {
   }
 
 
-  const accomplishedMilestones = getAccomplishedMilestones(user.refill_amount, milestones)
-  // handleAccomplished(accomplishedMilestones);
 
   return (
     <div className="central">
@@ -70,7 +70,7 @@ function Milestone({user, milestones, getAccomplishedMilestones}) {
           style={{  margin: '15px', display: 'flex', flexWrap: 'wrap' }}
           className="mb-2"
         >
-          <Card.Header>{milestone.Type} <i class="bi bi-award"></i></Card.Header>
+          <Card.Header>{milestone.Type} <i className="bi bi-award"></i></Card.Header>
           <Card.Body>
             <Card.Title>{milestone.Name}</Card.Title>
             Congratulations for reaching this milestone!
@@ -108,7 +108,7 @@ function Milestone({user, milestones, getAccomplishedMilestones}) {
         <Button variant="milestone"
           size="xxl"
           className="log-refill"
-          onClick={() => dispatch(setPage(false))}
+          onClick={() =>dispatch(setPage(false))}
         >
           Home
         </Button>

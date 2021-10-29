@@ -2,12 +2,12 @@ import Carousel from 'react-bootstrap/Carousel'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Refill from './Refill';
 import { useState } from 'react';
-import water from '../images/img_water_2.jpg'
-import co2 from '../images/img_co2_1.jpg'
-import money from '../images/img_money.jpg'
-import plastic from '../images/img_plastic.jpg'
+import water from '../images/spray.jpg'
+import co2 from '../images/avenue.jpg'
+import money from '../images/money-3.jpg'
+import plastic from '../images/watering-can.jpg'
 
-function Carousels({user, handleUserChange}) {
+function Carousels({ user, handleUserChange }) {
   const [stone, setStones] = useState(0);
   const handleStoneChange = (changedUser) => {
     setStones(changedUser.refill_amount)
@@ -15,68 +15,57 @@ function Carousels({user, handleUserChange}) {
 
   return (
     <div>
-      <div className='container-fluid' >
-        <div className="row">
-          <div className="col-sm-12">
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12">
-            <Carousel>
+      <Carousel>
+        <Carousel.Item style={{ maxHeight: '580px' }}>
+          <img
+            className="d-block w-100"
+            src={water}
+            alt="water"
+          />
+          <Carousel.Caption>
+            <h3 style={{ fontWeight: 'bolder', fontSize: '40px', textShadow: '2px 2px 4px black);', fontFamily: 'Arial Rounded MT Bold' }}>I've saved {stone} L water!</h3>
+          </Carousel.Caption>
+        </Carousel.Item>
 
-              <Carousel.Item>
-                <img
-                  className="d-block w-100"
-                  src={water}
-                  alt="First slide"
-                />
-                <Carousel.Caption>
-                  <h3 style={{fontWeight: 'bolder', fontSize: '36px', textShadow: '1px 1px 2px black'}}>I've saved {stone} L water!</h3>
-                </Carousel.Caption>
-              </Carousel.Item>
+        <Carousel.Item style={{ maxHeight: '580px' }}>
+          <img
+            className="d-block w-100"
+            src={co2}
+            alt="co2"
+          />
 
-              <Carousel.Item>
-                <img
-                  className="d-block w-100"
-                  src={co2}
-                  alt="Second slide"
-                />
+          <Carousel.Caption>
+            <h3 style={{ fontWeight: 'bolder', fontSize: '40px', textShadow: '2px 2px 4px black);', fontFamily: 'Arial Rounded MT Bold' }}>I've saved {(Math.round(stone * 0.1656 * 10)) / 10} kg of CO2!</h3>
+          </Carousel.Caption>
+        </Carousel.Item>
 
-                <Carousel.Caption>
-                  <h3 style={{fontWeight: 'bolder', fontSize: '36px', textShadow: '1px 1px 2px black'}}>I've saved {Math.round(stone * 0.1656)} kg of CO2!</h3>
-                </Carousel.Caption>
-              </Carousel.Item>
+        <Carousel.Item style={{ maxHeight: '580px' }}>
+          <img
+            className="d-block w-100"
+            src={plastic}
+            alt="plastic"
+          />
+          <Carousel.Caption>
+            <h3 style={{ fontWeight: 'bolder', fontSize: '40px', textShadow: '2px 2px 4px black);', fontFamily: 'Arial Rounded MT Bold' }}>I've saved {(Math.round(stone * 0.02 * 10)) / 10} kg of Plastic!</h3>
+          </Carousel.Caption>
+        </Carousel.Item>
 
-              <Carousel.Item>
-                <img
-                  className="d-block w-100"
-                  src={plastic}
-                  alt="Third slide"
-                />
-                <Carousel.Caption>
-                  <h3 style={{fontWeight: 'bolder', fontSize: '36px', textShadow: '1px 1px 2px black'}}>I've saved {Math.round(stone * 0.02)} kg of Plastic!</h3>
-                </Carousel.Caption>
-              </Carousel.Item>
+        <Carousel.Item style={{ maxHeight: '580px' }}>
+          <img
+            className="d-block w-100"
+            src={money}
+            alt="money"
+          />
+          <Carousel.Caption>
+            <h3 style={{ fontWeight: 'bolder', fontSize: '40px', textShadow: '4px 4px 4px black);', fontFamily: 'Arial Rounded MT Bold' }}>I've saved {stone * 200} yen!</h3>
+          </Carousel.Caption>
+        </Carousel.Item>
 
-              <Carousel.Item>
-                <img
-                  className="d-block w-100"
-                  src={money}
-                  alt="Third slide"
-                />
-                <Carousel.Caption>
-                  <h3 style={{fontWeight: 'bolder', fontSize: '36px', textShadow: '1px 1px 2px black'}}>I've saved {stone * 200} yen!</h3>
-                </Carousel.Caption>
-              </Carousel.Item>
-
-            </Carousel>
-            <Refill user={user} 
-            handleUserChange={handleUserChange}
-            handleStoneChange={handleStoneChange}
-            />
-          </div>
-        </div>
-      </div>
+      </Carousel>
+      <Refill user={user}
+        handleUserChange={handleUserChange}
+        handleStoneChange={handleStoneChange}
+      />
     </div>
   );
 }

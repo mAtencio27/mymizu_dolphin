@@ -30,10 +30,11 @@ function Refill({user, handleUserChange, handleStoneChange}) {
           className="log-refill"
           onClick={() => {
             const newUser = {...user};
-            newUser.refill_amount += 0.5;
+            newUser.refill_amount += 20;
             handleUserChange(newUser);
             handleStoneChange(newUser);
           }}
+          // style={{display: 'block', margin: '0 auto'}}
         >
           Log refill
         </Button>
