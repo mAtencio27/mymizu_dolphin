@@ -20,7 +20,7 @@ function Carousels({ user, handleUserChange }) {
           @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
     `}
         </style>
-      <Carousel>
+      <Carousel interval="10000">
         <Carousel.Item style={{ maxHeight: '580px' }}>
           <img
             className="d-block w-100"
