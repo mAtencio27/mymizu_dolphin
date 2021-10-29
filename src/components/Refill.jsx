@@ -34,6 +34,7 @@ function Refill({user, handleUserChange, handleStoneChange}) {
             handleUserChange(newUser);
             handleStoneChange(newUser);
           }}
+          // style={{display: 'block', margin: '0 auto'}}
         >
           Log refill
         </Button>

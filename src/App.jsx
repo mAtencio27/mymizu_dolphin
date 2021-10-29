@@ -2,7 +2,6 @@ import './App.css';
 import Carousels from './components/Carousels';
 import Button from 'react-bootstrap/Button'
 import Milestone from './components/Milestone';
-import AlertFunc from './components/AlertFunc';
 import { useState, useEffect } from 'react'
 import axios from 'axios';
 import { setPage } from './slices/pageSlice';
@@ -18,7 +17,6 @@ function App() {
   const [user, setUser] = useState({});
   const page = useSelector(state => state.page)
   const dispatch = useDispatch();
-  const [userMilestones, setUserMilestones] = useState(["stone1", "stone2"])
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -76,18 +74,33 @@ function App() {
     dispatch(setPage(true))
   }
 
-  
-  let accomplishedMilestones = getAccomplishedMilestones(user.refill_amount, milestones)
+  const accomplishedMilestones = getAccomplishedMilestones(user.refill_amount, milestones)
   // const handleAlert = () => {
-  //   if (accomplishedMilestones.length) {
-  //     setShow(true);
+    //   if (accomplishedMilestones.length) {
+      //     setShow(true);
+      //   }
+      // }
+      // if the milestone updated ---> if the length change, setShow(true)
+      // if user close the alert setShow(false)
+      
+      
+      // const now = new Date();
+      // const greet = () => {
+        //   if(now.getHours() <= 3 && now.getHours() >= 17) {
+  //     return 'Good evening, '
+  //   } else if (now.getHours() >= 4 && now.getHours() <= 9) {
+  //     return 'Good morning, '
+  //   } else if (now.getHours() >= 10 && now.getHours() <= 12) {
+  //     return 'Hello, '
+  //   } else {
+  //     return 'Good afternoon, '
   //   }
   // }
-
+  
   return (
     <div>
       <header>
-        <h1>my mizu: {user.id}</h1>
+        <h1>mymizu Milestones</h1>
       </header>
       <main className="App-main">
         {/* <AlertFunc 
@@ -95,24 +108,21 @@ function App() {
         milestones={milestones}
         getAccomplishedMilestones={getAccomplishedMilestones}
       /> */}
-        {accomplishedMilestones.length ?
-        <div className={page ? "hide" : ""}>
+        {/* {accomplishedMilestones.length ?  
           <Alert
             variant="info"
             show={true}
             onClose={() => {
-              // setShow(false)
-              accomplishedMilestones = [];
+              setShow(false)
+              // accomplishedMilestones = [];
             }}
-            // onClick={() => dispatch(setPage(false))}
             style={{ width: '90%', marginLeft: '14px' }}
             dismissible
-          >You've reached Milestone!</Alert></div>
-          : null}
+          >You've reached Milestone🎉</Alert> 
+           : null}  */}
         <section className={page ? "hide" : ""}>
           <Carousels user={user}
             handleUserChange={handleUserChange}
-            userMilestones={userMilestones}
           />
         </section>
         <style type="text/css">
@@ -136,6 +146,7 @@ function App() {
             size="xxl"
             className="log-refill"
             onClick={milestoneButtonHandler}
+            // style={{display: 'block', margin: '0 auto'}}
           >
             Check Milestone
           </Button>
@@ -145,7 +156,6 @@ function App() {
             user={user}
             milestones={milestones}
             getAccomplishedMilestones={getAccomplishedMilestones}
-          // handleAccomplished={handleAccomplished}
           />
         </section>
       </main>
