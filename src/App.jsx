@@ -142,14 +142,16 @@ function App() {
     `}
         </style>
         <div className={page ? "hide" : ""}>
-          <Button variant="milestone"
-            size="xxl"
-            className="log-refill"
-            onClick={milestoneButtonHandler}
-            // style={{display: 'block', margin: '0 auto'}}
-          >
-            Check Milestone
-          </Button>
+        <div className="d-grid gap-2">
+            <Button variant="milestone"
+              size="xxl"
+              className="log-refill"
+              onClick={milestoneButtonHandler}
+              // style={{display: 'block', margin: '0 auto'}}
+            >
+              Check Milestone
+            </Button>
+          </div>
         </div>
         <section className={!page ? "hide" : ""}>
           <Milestone

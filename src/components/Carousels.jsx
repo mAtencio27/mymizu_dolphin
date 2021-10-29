@@ -15,6 +15,11 @@ function Carousels({ user, handleUserChange }) {
 
   return (
     <div>
+    <style type="text/css">
+          {`
+          @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+    `}
+        </style>
       <Carousel>
         <Carousel.Item style={{ maxHeight: '580px' }}>
           <img
@@ -23,7 +28,7 @@ function Carousels({ user, handleUserChange }) {
             alt="water"
           />
           <Carousel.Caption>
-            <h3 style={{ fontWeight: 'bolder', fontSize: '40px', textShadow: '2px 2px 4px black);', fontFamily: 'Arial Rounded MT Bold' }}>I've saved {stone} L water!</h3>
+            <h3 style={{ fontWeight: 'bolder', fontSize: '40px', textShadow: '2px 2px 4px black', fontFamily: 'Bree Serif, serif' }}>I've saved {stone} L water!</h3>
           </Carousel.Caption>
         </Carousel.Item>
 
@@ -35,7 +40,7 @@ function Carousels({ user, handleUserChange }) {
           />
 
           <Carousel.Caption>
-            <h3 style={{ fontWeight: 'bolder', fontSize: '40px', textShadow: '2px 2px 4px black);', fontFamily: 'Arial Rounded MT Bold' }}>I've saved {(Math.round(stone * 0.1656 * 10)) / 10} kg of CO2!</h3>
+            <h3 style={{ fontWeight: 'bolder', fontSize: '40px', textShadow: '2px 2px 4px black', fontFamily: 'Bree Serif, serif' }}>I've saved {(Math.round(stone * 0.1656 * 10)) / 10} kg of CO2!</h3>
           </Carousel.Caption>
         </Carousel.Item>
 
@@ -46,7 +51,7 @@ function Carousels({ user, handleUserChange }) {
             alt="plastic"
           />
           <Carousel.Caption>
-            <h3 style={{ fontWeight: 'bolder', fontSize: '40px', textShadow: '2px 2px 4px black);', fontFamily: 'Arial Rounded MT Bold' }}>I've saved {(Math.round(stone * 0.02 * 10)) / 10} kg of Plastic!</h3>
+            <h3 style={{ fontWeight: 'bolder', fontSize: '40px', textShadow: '2px 2px 4px black', fontFamily: 'Bree Serif, serif' }}>I've saved {(Math.round(stone * 0.02 * 10)) / 10} kg of Plastic!</h3>
           </Carousel.Caption>
         </Carousel.Item>
 
@@ -57,7 +62,7 @@ function Carousels({ user, handleUserChange }) {
             alt="money"
           />
           <Carousel.Caption>
-            <h3 style={{ fontWeight: 'bolder', fontSize: '40px', textShadow: '4px 4px 4px black);', fontFamily: 'Arial Rounded MT Bold' }}>I've saved {stone * 200} yen!</h3>
+            <h3 style={{ fontWeight: 'bolder', fontSize: '40px', textShadow: '4px 4px 4px black', fontFamily: 'Bree Serif, serif' }}>I've saved {stone * 200} yen!</h3>
           </Carousel.Caption>
         </Carousel.Item>
 

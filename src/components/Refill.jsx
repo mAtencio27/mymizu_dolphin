@@ -13,7 +13,8 @@ function Refill({user, handleUserChange, handleStoneChange}) {
       font-weight: bolder;
       cursor: pointer;
       margin-top: 15px;
-      margin-left: 4px;
+      margin-left: 15px;
+      margin-right: 15px;
     }
 
     .btn-xxl {
@@ -23,21 +24,22 @@ function Refill({user, handleUserChange, handleStoneChange}) {
     }
     `}
         </style>
-
-        <Button
-          variant="refill"
-          size="xxl"
-          className="log-refill"
-          onClick={() => {
-            const newUser = {...user};
-            newUser.refill_amount += 20;
-            handleUserChange(newUser);
-            handleStoneChange(newUser);
-          }}
-          // style={{display: 'block', margin: '0 auto'}}
-        >
-          Log refill
-        </Button>
+        <div className="d-grid gap-2">
+          <Button
+            variant="refill"
+            size="xxl"
+            className="log-refill"
+            onClick={() => {
+              const newUser = {...user};
+              newUser.refill_amount += 20;
+              handleUserChange(newUser);
+              handleStoneChange(newUser);
+            }}
+            // style={{display: 'block', margin: '0 auto'}}
+          >
+            Log refill
+          </Button>
+          </div>
     </div>
   );
 }
