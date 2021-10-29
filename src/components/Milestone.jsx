@@ -104,14 +104,15 @@ function Milestone({user, milestones, getAccomplishedMilestones}) {
     }
     `}
         </style>
-
-        <Button variant="milestone"
-          size="xxl"
-          className="log-refill"
-          onClick={() =>dispatch(setPage(false))}
-        >
-          Home
-        </Button>
+        <div className="d-grid gap-2">
+          <Button variant="milestone"
+            size="lg"
+            className="log-refill"
+            onClick={() =>dispatch(setPage(false))}
+          >
+            Home
+          </Button>
+        </div>
         <div><a href="https://icons8.com/">All Icons from Icons8</a></div>
     </Container>
     </div>
